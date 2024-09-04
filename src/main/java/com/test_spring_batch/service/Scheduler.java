@@ -9,12 +9,12 @@ import java.util.Date;
 @Component
 public class Scheduler {
 
-  @Scheduled(cron = "0 * 19 * * ?")
-  public void cronJobScheduler() {
+  @Scheduled(fixedDelay = 3000)
+  public void fixedDelayScheduler() {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     Date now = new Date();
     String stringDate = sdf.format(now);
-    System.out.println("Java cron job expressions %s%n".formatted(stringDate));
+    System.out.println("Fixed Delay Scheduler %s%n".formatted(stringDate));
   }
 
 
