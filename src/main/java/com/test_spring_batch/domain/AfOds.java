@@ -1,7 +1,10 @@
 package com.test_spring_batch.domain;
 
+import lombok.Data;
+
 import java.sql.Timestamp;
 
+@Data
 public class AfOds {
 
   private String codEnt;
