@@ -1,4 +1,6 @@
 package com.test_spring_batch.steps;
 
-public class ItemDecompressStep {
+import org.springframework.batch.core.step.tasklet.Tasklet;
+
+public class ItemDecompressStep implements Tasklet {
 }
