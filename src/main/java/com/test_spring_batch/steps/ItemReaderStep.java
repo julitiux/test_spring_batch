@@ -49,6 +49,8 @@ public class ItemReaderStep implements Tasklet {
       afOdsList.add(afOds);
     }
 
+    csvReader.close();
+    reader.close();
 
     return null;
   }
