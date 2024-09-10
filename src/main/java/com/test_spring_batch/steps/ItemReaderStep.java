@@ -4,6 +4,7 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import com.test_spring_batch.domain.AfOds;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
@@ -14,6 +15,8 @@ import org.springframework.core.io.ResourceLoader;
 
 import java.io.FileReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class ItemReaderStep implements Tasklet {
@@ -33,6 +36,19 @@ public class ItemReaderStep implements Tasklet {
     CSVReader csvReader = new CSVReaderBuilder(reader)
       .withCSVParser(parser)
       .build();
+
+    List<AfOds> afOdsList = new ArrayList<>();
+    String[] actualLine;
+
+    while ((actualLine = csvReader.readNext()) != null) {
+      AfOds afOds = new AfOds();
+      afOds.setCodEnt(actualLine[0]);
+      afOds.setIdListNegra(actualLine[1]);
+      afOds.setCodListNegra(actualLine[2]);
+
+      afOdsList.add(afOds);
+    }
+
 
     return null;
   }
