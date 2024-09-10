@@ -26,6 +26,13 @@ public class ItemProcessorStep implements Tasklet {
       }
     ).toList();
 
+    chunkContext
+      .getStepContext()
+      .getStepExecution()
+      .getJobExecution()
+      .getExecutionContext()
+      .put("afOdsList", afOdsList);
+
     return null;
   }
 }
