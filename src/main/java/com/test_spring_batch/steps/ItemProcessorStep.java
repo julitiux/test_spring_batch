@@ -33,6 +33,6 @@ public class ItemProcessorStep implements Tasklet {
       .getExecutionContext()
       .put("afOdsList", afOdsList);
 
-    return null;
+    return RepeatStatus.FINISHED;
   }
 }
