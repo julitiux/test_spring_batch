@@ -55,6 +55,7 @@ public class ItemReaderStep implements Tasklet {
     chunkContext
       .getStepContext()
       .getStepExecution()
+      .getJobExecution()
       .getExecutionContext()
       .put("afOdsList", afOdsList);
 
