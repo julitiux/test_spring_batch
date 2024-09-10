@@ -6,6 +6,7 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ItemProcessorStep implements Tasklet {
@@ -13,11 +14,17 @@ public class ItemProcessorStep implements Tasklet {
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 
     List<AfOds> afOdsList = (List<AfOds>) chunkContext
-      .getStepContext()
-      .getStepExecution()
-      .getJobExecution()
-      .getExecutionContext()
-      .get("afOdsList");
+                                                  .getStepContext()
+                                                  .getStepExecution()
+                                                  .getJobExecution()
+                                                  .getExecutionContext()
+                                                  .get("afOdsList");
+
+    List<AfOds> afOdsFinalList = afOdsList.stream().map(afOds -> {
+        afOds.setFchTimestampUmo(new Timestamp(System.currentTimeMillis()));
+        return afOds;
+      }
+    ).toList();
 
     return null;
   }
