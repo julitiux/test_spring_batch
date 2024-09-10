@@ -27,6 +27,6 @@ public class ItemWritterStep implements Tasklet {
 
     // TODO: dont forget implement the Repo
 
-    return null;
+    return RepeatStatus.FINISHED;
   }
 }
