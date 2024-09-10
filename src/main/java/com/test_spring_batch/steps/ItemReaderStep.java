@@ -52,6 +52,12 @@ public class ItemReaderStep implements Tasklet {
     csvReader.close();
     reader.close();
 
+    chunkContext
+      .getStepContext()
+      .getStepExecution()
+      .getExecutionContext()
+      .put("afOdsList", afOdsList);
+
     return RepeatStatus.FINISHED;
   }
 }
