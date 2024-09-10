@@ -2,6 +2,7 @@ package com.test_spring_batch.config;
 
 import com.test_spring_batch.steps.ItemProcessorStep;
 import com.test_spring_batch.steps.ItemReaderStep;
+import com.test_spring_batch.steps.ItemWritterStep;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,11 @@ public class BatchConfiguration {
   @Bean
   public ItemProcessorStep itemProcessorStep() {
     return new ItemProcessorStep();
+  }
+
+  @Bean
+  public ItemWritterStep itemWritterStep() {
+    return new ItemWritterStep();
   }
 
 }
