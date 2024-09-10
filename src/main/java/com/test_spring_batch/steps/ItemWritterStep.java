@@ -25,6 +25,8 @@ public class ItemWritterStep implements Tasklet {
         System.out.println(afOds.toString());
     });
 
+    // TODO: dont forget implement the Repo
+
     return null;
   }
 }
