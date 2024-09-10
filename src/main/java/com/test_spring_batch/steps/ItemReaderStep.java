@@ -52,6 +52,6 @@ public class ItemReaderStep implements Tasklet {
     csvReader.close();
     reader.close();
 
-    return null;
+    return RepeatStatus.FINISHED;
   }
 }
