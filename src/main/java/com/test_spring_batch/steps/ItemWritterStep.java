@@ -7,6 +7,7 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ItemWritterStep implements Tasklet {
   @Override
@@ -19,6 +20,10 @@ public class ItemWritterStep implements Tasklet {
                                                   .getExecutionContext()
                                                   .get("afOdsList");
 
+    afOdsList.forEach( afOds -> {
+      if(!Objects.isNull(afOds))
+        System.out.println(afOds.toString());
+    });
 
     return null;
   }
