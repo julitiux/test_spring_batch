@@ -48,4 +48,12 @@ public class BatchConfiguration {
       .build();
   }
 
+  @Bean
+  public Step processDataStep(){
+    return stepBuilderFactory
+      .get("itemProcessStep")
+      .tasklet(itemProcessorStep())
+      .build();
+  }
+
 }
