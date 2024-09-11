@@ -3,6 +3,7 @@ package com.test_spring_batch.config;
 import com.test_spring_batch.steps.ItemProcessorStep;
 import com.test_spring_batch.steps.ItemReaderStep;
 import com.test_spring_batch.steps.ItemWritterStep;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.JobScope;
@@ -37,6 +38,14 @@ public class BatchConfiguration {
   @JobScope
   public ItemWritterStep itemWritterStep() {
     return new ItemWritterStep();
+  }
+
+  @Bean
+  public Step readFileStep() {
+    return stepBuilderFactory
+      .get("itemReaderStep")
+      .tasklet(itemReaderStep())
+      .build();
   }
 
 }
