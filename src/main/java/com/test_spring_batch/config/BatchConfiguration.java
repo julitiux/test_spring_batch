@@ -49,10 +49,18 @@ public class BatchConfiguration {
   }
 
   @Bean
-  public Step processDataStep(){
+  public Step processDataStep() {
     return stepBuilderFactory
       .get("itemProcessStep")
       .tasklet(itemProcessorStep())
+      .build();
+  }
+
+  @Bean
+  public Step writerDataStep() {
+    return stepBuilderFactory
+      .get("itemWritterStep")
+      .tasklet(itemWritterStep())
       .build();
   }
 
