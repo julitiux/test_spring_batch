@@ -1,12 +1,15 @@
 package com.test_spring_batch.config;
 
 import com.test_spring_batch.domain.AfOds;
+import com.test_spring_batch.repository.AfOdsRepository;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -14,6 +17,9 @@ import org.springframework.core.io.FileSystemResource;
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
+
+  @Autowired
+  private AfOdsRepository afOdsRepository;
 
   @Bean
   public FlatFileItemReader<AfOds> itemReader() {
@@ -28,6 +34,14 @@ public class BatchConfiguration {
   @Bean
   public AfOdsProcessor processor() {
     return new AfOdsProcessor();
+  }
+
+  @Bean
+  public RepositoryItemWriter<AfOds> writer() {
+    RepositoryItemWriter<AfOds> writer = new RepositoryItemWriter<>();
+    writer.setRepository(afOdsRepository);
+    writer.setMethodName("save");
+    return writer;
   }
 
   private LineMapper<AfOds> lineMapper() {
