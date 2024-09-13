@@ -25,6 +25,11 @@ public class BatchConfiguration {
     return itemReader;
   }
 
+  @Bean
+  public AfOdsProcessor processor() {
+    return new AfOdsProcessor();
+  }
+
   private LineMapper<AfOds> lineMapper() {
     DefaultLineMapper<AfOds> lineMapper = new DefaultLineMapper<>();
 
