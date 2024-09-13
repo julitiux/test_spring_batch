@@ -2,8 +2,10 @@ package com.test_spring_batch.config;
 
 import com.test_spring_batch.domain.AfOds;
 import com.test_spring_batch.repository.AfOdsRepository;
+import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.data.RepositoryItemWriter;
@@ -62,6 +64,13 @@ public class BatchConfiguration {
       .reader(itemReader())
       .processor(processor())
       .writer(writer())
+      .build();
+  }
+
+  @Bean
+  public Job runJob() {
+    return new JobBuilder("importAfOds", jobRepository)
+      .start(importStep())
       .build();
   }
 
