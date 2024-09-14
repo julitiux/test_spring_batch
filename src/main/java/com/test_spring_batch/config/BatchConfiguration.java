@@ -4,7 +4,6 @@ import com.test_spring_batch.domain.AfOds;
 import com.test_spring_batch.repository.AfOdsRepository;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -80,6 +79,7 @@ public class BatchConfiguration {
     DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
     lineTokenizer.setDelimiter("|");
     lineTokenizer.setStrict(false);
+    lineTokenizer.setNames("codeEntity", "idListBlack", "codeListBlack");
 
     BeanWrapperFieldSetMapper<AfOds> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
     fieldSetMapper.setTargetType(AfOds.class);
