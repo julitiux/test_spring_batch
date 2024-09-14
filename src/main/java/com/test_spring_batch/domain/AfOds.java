@@ -15,11 +15,11 @@ public class AfOds {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
-  private String codEnt;
-  private String idListNegra;
-  private String codListNegra;
+  private String codeEntity;
+  private String idListBlack;
+  private String codeListBlack;
 
   @CreationTimestamp
-  private Date fchTimestampUmo;
+  private Date timestampLastMod;
 
 }
