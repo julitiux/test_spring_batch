@@ -23,3 +23,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:27017/mondongo
+      database: mondongo
