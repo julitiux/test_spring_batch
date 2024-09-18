@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: test_spring_batch
+
+batch:
+  job:
+    enabled: false
+  jdbc:
+    initialize-schema: always
+
+servlet:
+  multipart:
+    enabled: true
+
+datasource:
+  url: jdbc:postgresql://localhost:5423/db
+  username: user
+  password: secret
+
+jpa:
+  hibernate:
+    ddl-auto: create-drop
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
