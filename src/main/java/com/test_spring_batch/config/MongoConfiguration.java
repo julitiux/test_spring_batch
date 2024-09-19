@@ -2,17 +2,23 @@ package com.test_spring_batch.config;
 
 import com.mongodb.client.MongoClients;
 import com.test_spring_batch.domain.AfOdsMongo;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.data.MongoItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 public class MongoConfiguration {
@@ -39,6 +45,12 @@ public class MongoConfiguration {
     return itemReader;
   }
 
+  @Autowired
+  private JobRepository jobRepository;
+
+  @Autowired
+  private PlatformTransactionManager platformTransactionManager;
+
   @Bean
   public AfOdsMongoProcessor processorMongo() {
     return new AfOdsMongoProcessor();
@@ -50,6 +62,16 @@ public class MongoConfiguration {
     writer.setTemplate(mongoTemplate());
     writer.setCollection("AfOdsMongo");
     return writer;
+  }
+
+  @Bean
+  public Step stepMongo(){
+    return new StepBuilder("csvMongo", jobRepository)
+      .<AfOdsMongo, AfOdsMongo>chunk(10, platformTransactionManager)
+      .reader(itemReaderMongo())
+      .processor(processorMongo())
+      .writer(writerMongo())
+      .build();
   }
 
 
