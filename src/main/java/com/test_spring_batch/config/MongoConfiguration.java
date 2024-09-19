@@ -2,8 +2,9 @@ package com.test_spring_batch.config;
 
 import com.mongodb.client.MongoClients;
 import com.test_spring_batch.domain.AfOdsMongo;
+import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.data.MongoItemWriter;
@@ -65,7 +66,7 @@ public class MongoConfiguration {
   }
 
   @Bean
-  public Step stepMongo(){
+  public Step stepMongo() {
     return new StepBuilder("csvMongo", jobRepository)
       .<AfOdsMongo, AfOdsMongo>chunk(10, platformTransactionManager)
       .reader(itemReaderMongo())
@@ -74,7 +75,13 @@ public class MongoConfiguration {
       .build();
   }
 
-
+  @Bean
+  public Job runJobMongo() {
+    return new JobBuilder("importAfOdsMongo", jobRepository)
+      .start(stepMongo())
+      .build();
+  }
+  
   private LineMapper<AfOdsMongo> lineMapper() {
     DefaultLineMapper<AfOdsMongo> lineMapper = new DefaultLineMapper<>();
 
