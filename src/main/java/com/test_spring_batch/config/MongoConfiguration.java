@@ -30,7 +30,7 @@ public class MongoConfiguration {
   }
 
   @Bean
-  public FlatFileItemReader<AfOdsMongo> itemReader() {
+  public FlatFileItemReader<AfOdsMongo> itemReaderMongo() {
     FlatFileItemReader<AfOdsMongo> itemReader = new FlatFileItemReader<>();
     itemReader.setResource(new FileSystemResource("src/main/resources/emailBlackList.csv"));
     itemReader.setName("csvReaderForMongo");
@@ -40,12 +40,12 @@ public class MongoConfiguration {
   }
 
   @Bean
-  public AfOdsMongoProcessor processor() {
+  public AfOdsMongoProcessor processorMongo() {
     return new AfOdsMongoProcessor();
   }
 
   @Bean
-  public MongoItemWriter<AfOdsMongo> writer() {
+  public MongoItemWriter<AfOdsMongo> writerMongo() {
     MongoItemWriter<AfOdsMongo> writer = new MongoItemWriter<>();
     writer.setTemplate(mongoTemplate());
     writer.setCollection("AfOdsMongo");
