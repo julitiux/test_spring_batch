@@ -1,7 +1,12 @@
 package com.test_spring_batch.config;
 
+import com.test_spring_batch.domain.AfOds;
 import com.test_spring_batch.domain.AfOdsMongo;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.LineMapper;
+import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.batch.item.file.mapping.DefaultLineMapper;
+import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -17,6 +22,23 @@ public class MongoConfiguration {
     itemReader.setLinesToSkip(1);
     itemReader.setLineMapper(lineMapper());
     return itemReader;
+  }
+
+  private LineMapper<AfOdsMongo> lineMapper() {
+    DefaultLineMapper<AfOdsMongo> lineMapper = new DefaultLineMapper<>();
+
+    DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+    lineTokenizer.setDelimiter("|");
+    lineTokenizer.setStrict(false);
+    lineTokenizer.setNames("codeEntity", "idListBlack", "codeListBlack");
+
+    BeanWrapperFieldSetMapper<AfOdsMongo> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
+    fieldSetMapper.setTargetType(AfOdsMongo.class);
+
+    lineMapper.setLineTokenizer(lineTokenizer);
+    lineMapper.setFieldSetMapper(fieldSetMapper);
+
+    return lineMapper;
   }
 
 }
