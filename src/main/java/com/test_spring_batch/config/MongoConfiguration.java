@@ -1,6 +1,5 @@
 package com.test_spring_batch.config;
 
-import com.test_spring_batch.domain.AfOds;
 import com.test_spring_batch.domain.AfOdsMongo;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -23,6 +22,12 @@ public class MongoConfiguration {
     itemReader.setLineMapper(lineMapper());
     return itemReader;
   }
+
+  @Bean
+  public AfOdsMongoProcessor processor(){
+    return new AfOdsMongoProcessor();
+  }
+
 
   private LineMapper<AfOdsMongo> lineMapper() {
     DefaultLineMapper<AfOdsMongo> lineMapper = new DefaultLineMapper<>();
