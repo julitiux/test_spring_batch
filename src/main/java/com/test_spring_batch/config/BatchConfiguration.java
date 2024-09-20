@@ -66,7 +66,7 @@ public class BatchConfiguration {
       .build();
   }
 
-  @Bean
+//  @Bean
   public Job runJob() {
     return new JobBuilder("importAfOds", jobRepository)
       .start(importStep())
