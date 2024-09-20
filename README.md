@@ -1,5 +1,7 @@
 # test_spring_batch
 
+# PostgreSQL
+
 ## start database
 ```shell
 ./starting.sh
@@ -14,16 +16,17 @@
 ```shell
 docker exec -it spring_batch_db psql -U user -d db
 ```
+# Mongo
 
-# execute a terminal mongosh
-```shell
-docker exec -it mongodb mongosh
-```
-
-# starting and ending the service Mongo Docker
+## starting and ending the service Mongo Docker
 ```shell
 docker start mongodb
 docker stop mongodb
+```
+
+## execute a terminal mongosh
+```shell
+docker exec -it mongodb mongosh
 ```
 
 ## create collection MongoDB
