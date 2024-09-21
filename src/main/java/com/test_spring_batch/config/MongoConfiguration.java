@@ -24,6 +24,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class MongoConfiguration {
 
+  @Autowired
+  private JobRepository jobRepository;
+
+  @Autowired
+  private PlatformTransactionManager platformTransactionManager;
+
   @Value("${spring.data.mongodb.uri}")
   private String mongoUri;
 
@@ -45,12 +51,6 @@ public class MongoConfiguration {
     itemReader.setLineMapper(lineMapper());
     return itemReader;
   }
-
-  @Autowired
-  private JobRepository jobRepository;
-
-  @Autowired
-  private PlatformTransactionManager platformTransactionManager;
 
   @Bean
   public AfOdsMongoProcessor processorMongo() {
@@ -81,7 +81,7 @@ public class MongoConfiguration {
       .start(stepMongo())
       .build();
   }
-  
+
   private LineMapper<AfOdsMongo> lineMapper() {
     DefaultLineMapper<AfOdsMongo> lineMapper = new DefaultLineMapper<>();
 
