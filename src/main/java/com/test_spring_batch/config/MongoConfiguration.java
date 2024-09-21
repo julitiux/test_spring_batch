@@ -24,6 +24,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class MongoConfiguration {
 
+  @Value("${spring.data.mongodb.uri}")
+  private String mongoUri;
+
+  @Value("${spring.data.mongodb.database}")
+  private String mongoDatabase;
+
   @Bean
   public MongoTemplate mongoTemplate() {
     // Crear una conexión con MongoDB usando el URI y pasarla a MongoTemplate
