@@ -33,7 +33,7 @@ public class MongoConfiguration {
   @Bean
   public MongoTemplate mongoTemplate() {
     // Crear una conexión con MongoDB usando el URI y pasarla a MongoTemplate
-    return new MongoTemplate(MongoClients.create("mongodb://julito:julito@localhost:27017/mondongo"), "mondongo");
+    return new MongoTemplate(MongoClients.create(mongoUri), mongoDatabase);
   }
 
   @Bean
