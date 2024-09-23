@@ -53,8 +53,8 @@ public class AfOdsConfiguration {
   }
 
   @Bean
-  public AfOdsMongoProcessor processorMongo() {
-    return new AfOdsMongoProcessor();
+  public AfOdsProcessor processorMongo() {
+    return new AfOdsProcessor();
   }
 
   @Bean
