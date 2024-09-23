@@ -22,7 +22,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-public class MongoConfiguration {
+public class AfOdsConfiguration {
 
   @Autowired
   private JobRepository jobRepository;
