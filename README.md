@@ -31,5 +31,5 @@ docker exec -it mongodb mongosh
 
 ## create collection MongoDB
 ```shell
-db.createCollection('AfOdsMongo')
+db.createCollection('AfOds')
 ```
