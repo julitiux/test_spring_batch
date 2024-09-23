@@ -54,7 +54,7 @@ public class AfOdsConfiguration {
   }
 
   @Bean
-  public AfOdsProcessor processorMongo() {
+  public AfOdsProcessor processor() {
     return new AfOdsProcessor();
   }
 
@@ -71,7 +71,7 @@ public class AfOdsConfiguration {
     return new StepBuilder("csvMongo", jobRepository)
       .<AfOdsMongo, AfOdsMongo>chunk(10, platformTransactionManager)
       .reader(itemReaderMongo())
-      .processor(processorMongo())
+      .processor(processor())
       .writer(writerMongo())
       .build();
   }
