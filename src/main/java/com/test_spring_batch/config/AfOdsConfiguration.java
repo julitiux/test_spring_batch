@@ -44,7 +44,7 @@ public class AfOdsConfiguration {
   }
 
   @Bean
-  public FlatFileItemReader<AfOdsMongo> itemReaderMongo() {
+  public FlatFileItemReader<AfOdsMongo> itemReader() {
     FlatFileItemReader<AfOdsMongo> itemReader = new FlatFileItemReader<>();
     itemReader.setResource(new FileSystemResource("src/main/resources/emailBlackList.csv"));
     itemReader.setName("csvReaderForMongo");
@@ -70,7 +70,7 @@ public class AfOdsConfiguration {
   public Step stepMongo() {
     return new StepBuilder("csvMongo", jobRepository)
       .<AfOdsMongo, AfOdsMongo>chunk(10, platformTransactionManager)
-      .reader(itemReaderMongo())
+      .reader(itemReader())
       .processor(processor())
       .writer(writerMongo())
       .build();
