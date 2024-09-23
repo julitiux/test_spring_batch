@@ -59,7 +59,7 @@ public class AfOdsConfiguration {
   }
 
   @Bean
-  public MongoItemWriter<AfOds> writerMongo() {
+  public MongoItemWriter<AfOds> writer() {
     MongoItemWriter<AfOds> writer = new MongoItemWriter<>();
     writer.setTemplate(mongoTemplate());
     writer.setCollection("AfOdsMongo");
@@ -72,7 +72,7 @@ public class AfOdsConfiguration {
       .<AfOds, AfOds>chunk(10, platformTransactionManager)
       .reader(itemReader())
       .processor(processor())
-      .writer(writerMongo())
+      .writer(writer())
       .build();
   }
 
