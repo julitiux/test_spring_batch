@@ -67,7 +67,7 @@ public class AfOdsConfiguration {
   }
 
   @Bean
-  public Step stepMongo() {
+  public Step step() {
     return new StepBuilder("csvMongo", jobRepository)
       .<AfOdsMongo, AfOdsMongo>chunk(10, platformTransactionManager)
       .reader(itemReader())
@@ -79,7 +79,7 @@ public class AfOdsConfiguration {
   @Bean
   public Job runJobMongo() {
     return new JobBuilder("importAfOdsMongo", jobRepository)
-      .start(stepMongo())
+      .start(step())
       .build();
   }
 
