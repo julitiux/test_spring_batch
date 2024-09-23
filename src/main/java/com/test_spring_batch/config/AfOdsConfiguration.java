@@ -1,7 +1,7 @@
 package com.test_spring_batch.config;
 
 import com.mongodb.client.MongoClients;
-import com.test_spring_batch.domain.AfOdsMongo;
+import com.test_spring_batch.domain.AfOds;
 import com.test_spring_batch.processor.AfOdsProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -44,8 +44,8 @@ public class AfOdsConfiguration {
   }
 
   @Bean
-  public FlatFileItemReader<AfOdsMongo> itemReader() {
-    FlatFileItemReader<AfOdsMongo> itemReader = new FlatFileItemReader<>();
+  public FlatFileItemReader<AfOds> itemReader() {
+    FlatFileItemReader<AfOds> itemReader = new FlatFileItemReader<>();
     itemReader.setResource(new FileSystemResource("src/main/resources/emailBlackList.csv"));
     itemReader.setName("csvReaderForMongo");
     itemReader.setLinesToSkip(1);
@@ -59,8 +59,8 @@ public class AfOdsConfiguration {
   }
 
   @Bean
-  public MongoItemWriter<AfOdsMongo> writerMongo() {
-    MongoItemWriter<AfOdsMongo> writer = new MongoItemWriter<>();
+  public MongoItemWriter<AfOds> writerMongo() {
+    MongoItemWriter<AfOds> writer = new MongoItemWriter<>();
     writer.setTemplate(mongoTemplate());
     writer.setCollection("AfOdsMongo");
     return writer;
@@ -69,7 +69,7 @@ public class AfOdsConfiguration {
   @Bean
   public Step step() {
     return new StepBuilder("csvMongo", jobRepository)
-      .<AfOdsMongo, AfOdsMongo>chunk(10, platformTransactionManager)
+      .<AfOds, AfOds>chunk(10, platformTransactionManager)
       .reader(itemReader())
       .processor(processor())
       .writer(writerMongo())
@@ -83,16 +83,16 @@ public class AfOdsConfiguration {
       .build();
   }
 
-  private LineMapper<AfOdsMongo> lineMapper() {
-    DefaultLineMapper<AfOdsMongo> lineMapper = new DefaultLineMapper<>();
+  private LineMapper<AfOds> lineMapper() {
+    DefaultLineMapper<AfOds> lineMapper = new DefaultLineMapper<>();
 
     DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
     lineTokenizer.setDelimiter("|");
     lineTokenizer.setStrict(false);
     lineTokenizer.setNames("codeEntity", "idListBlack", "codeListBlack");
 
-    BeanWrapperFieldSetMapper<AfOdsMongo> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
-    fieldSetMapper.setTargetType(AfOdsMongo.class);
+    BeanWrapperFieldSetMapper<AfOds> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
+    fieldSetMapper.setTargetType(AfOds.class);
 
     lineMapper.setLineTokenizer(lineTokenizer);
     lineMapper.setFieldSetMapper(fieldSetMapper);

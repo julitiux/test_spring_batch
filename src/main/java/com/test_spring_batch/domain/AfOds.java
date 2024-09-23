@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("AfOdsMongo")
 @Data
-public class AfOdsMongo {
+public class AfOds {
 
   @Id
   private String id;
