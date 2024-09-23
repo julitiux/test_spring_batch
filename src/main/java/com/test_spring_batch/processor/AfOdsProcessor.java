@@ -1,4 +1,4 @@
-package com.test_spring_batch.config;
+package com.test_spring_batch.processor;
 
 import com.test_spring_batch.domain.AfOdsMongo;
 import org.springframework.batch.item.ItemProcessor;

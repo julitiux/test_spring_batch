@@ -2,6 +2,7 @@ package com.test_spring_batch.config;
 
 import com.mongodb.client.MongoClients;
 import com.test_spring_batch.domain.AfOdsMongo;
+import com.test_spring_batch.processor.AfOdsProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
