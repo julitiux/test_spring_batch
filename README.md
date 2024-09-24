@@ -33,3 +33,11 @@ docker exec -it mongodb mongosh
 ```shell
 db.createCollection('AfOds')
 ```
+
+## run image sftp
+```shell
+docker run -p 22:22 \
+-v /Users/rrodriguez/git/github/upload:/home/user/upload \
+-d atmoz/sftp:latest \
+user:password:1001
+```
