@@ -41,3 +41,8 @@ docker run -p 22:22 \
   -d atmoz/sftp:latest \
   user:password:1001
 ```
+
+## start terminal
+```shell
+sftp user@localhost
+```
