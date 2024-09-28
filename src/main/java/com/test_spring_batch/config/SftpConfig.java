@@ -16,7 +16,7 @@ public class SftpConfig {
   public DefaultSftpSessionFactory sftpSessionFactory() {
     DefaultSftpSessionFactory factory = new DefaultSftpSessionFactory();
     factory.setHost("localhost");         // Cambia el host al de tu servidor SFTP
-    factory.setPort(2222);                // Cambia el puerto si es necesario
+    factory.setPort(22);                // Cambia el puerto si es necesario
     factory.setUser("user");
     factory.setPassword("password");
     factory.setAllowUnknownKeys(true);
@@ -27,15 +27,15 @@ public class SftpConfig {
   public SftpInboundFileSynchronizer sftpInboundFileSynchronizer() {
     SftpInboundFileSynchronizer synchronizer = new SftpInboundFileSynchronizer(sftpSessionFactory());
     synchronizer.setDeleteRemoteFiles(false);  // Si no quieres eliminar los archivos después de descargarlos
-    synchronizer.setRemoteDirectory("/remote/path"); // Directorio en el servidor SFTP
-    synchronizer.setFilter(new SftpSimplePatternFileListFilter("*.txt")); // Filtra archivos según su patrón
+    synchronizer.setRemoteDirectory("/upload"); // Directorio en el servidor SFTP
+    synchronizer.setFilter(new SftpSimplePatternFileListFilter("*.csv")); // Filtra archivos según su patrón
     return synchronizer;
   }
 
   @Bean
   public SftpInboundFileSynchronizingMessageSource sftpMessageSource() {
     SftpInboundFileSynchronizingMessageSource source = new SftpInboundFileSynchronizingMessageSource(sftpInboundFileSynchronizer());
-    source.setLocalDirectory(new File("/local/path")); // Directorio donde se guardarán los archivos descargados
+    source.setLocalDirectory(new File("/Users/rrodriguez/git/github/test_spring_batch/src/main/resources/downloaded")); // Directorio donde se guardarán los archivos descargados
     source.setAutoCreateLocalDirectory(true);
     return source;
   }
