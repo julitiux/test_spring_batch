@@ -31,7 +31,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.postgresql:postgresql'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-	implementation 'org.springframework.boot:spring-integration-sftp'
 	implementation 'com.jcraft:jsch:0.1.55'
 	implementation 'org.springframework.integration:spring-integration-file'
 	implementation 'org.springframework.integration:spring-integration-sftp'
