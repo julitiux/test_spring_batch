@@ -34,6 +34,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-integration-sftp'
 	implementation 'com.jcraft:jsch:0.1.55'
 	implementation 'org.springframework.integration:spring-integration-file'
+	implementation 'org.springframework.integration:spring-integration-sftp'
 }
 
 tasks.named('test') {
