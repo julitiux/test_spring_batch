@@ -8,6 +8,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.data.MongoItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -76,10 +77,20 @@ public class AfOdsConfiguration {
       .build();
   }
 
+  @Autowired
+  Tasklet sftpDownloadTasklet;
+
+  @Bean
+  public Step downloadFileStep(){
+    return new StepBuilder("downloadFileStep", jobRepository)
+      .tasklet(sftpDownloadTasklet, platformTransactionManager)
+      .build();
+  }
+
   @Bean
   public Job runJobMongo() {
     return new JobBuilder("importAfOdsMongo", jobRepository)
-      .start(step())
+      .start(downloadFileStep())
       .build();
   }
 
