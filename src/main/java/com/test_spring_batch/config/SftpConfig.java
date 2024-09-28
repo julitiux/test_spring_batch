@@ -4,7 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.sftp.filters.SftpSimplePatternFileListFilter;
 import org.springframework.integration.sftp.inbound.SftpInboundFileSynchronizer;
+import org.springframework.integration.sftp.inbound.SftpInboundFileSynchronizingMessageSource;
 import org.springframework.integration.sftp.session.DefaultSftpSessionFactory;
+
+import java.io.File;
 
 @Configuration
 public class SftpConfig {
@@ -27,6 +30,14 @@ public class SftpConfig {
     synchronizer.setRemoteDirectory("/remote/path"); // Directorio en el servidor SFTP
     synchronizer.setFilter(new SftpSimplePatternFileListFilter("*.txt")); // Filtra archivos según su patrón
     return synchronizer;
+  }
+
+  @Bean
+  public SftpInboundFileSynchronizingMessageSource sftpMessageSource() {
+    SftpInboundFileSynchronizingMessageSource source = new SftpInboundFileSynchronizingMessageSource(sftpInboundFileSynchronizer());
+    source.setLocalDirectory(new File("/local/path")); // Directorio donde se guardarán los archivos descargados
+    source.setAutoCreateLocalDirectory(true);
+    return source;
   }
 
 }
