@@ -38,3 +38,6 @@ out/
 
 ## POSTGRESQL
 datapg/
+
+## dile donwloaded
+src/main/resources/downloaded/
