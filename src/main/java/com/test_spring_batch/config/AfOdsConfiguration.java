@@ -47,7 +47,7 @@ public class AfOdsConfiguration {
   @Bean
   public FlatFileItemReader<AfOds> itemReader() {
     FlatFileItemReader<AfOds> itemReader = new FlatFileItemReader<>();
-    itemReader.setResource(new FileSystemResource("src/main/resources/emailBlackList.csv"));
+    itemReader.setResource(new FileSystemResource("src/main/resources/downloaded/emailBlackList.csv"));
     itemReader.setName("csvReaderForMongo");
     itemReader.setLinesToSkip(1);
     itemReader.setLineMapper(lineMapper());
