@@ -1,4 +1,4 @@
-package com.test_spring_batch.config;
+package com.test_spring_batch.sftp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

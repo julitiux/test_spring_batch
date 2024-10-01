@@ -1,4 +1,4 @@
-package com.test_spring_batch.config;
+package com.test_spring_batch.sftp;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
