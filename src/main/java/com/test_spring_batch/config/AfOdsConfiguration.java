@@ -91,6 +91,7 @@ public class AfOdsConfiguration {
   public Job runJobMongo() {
     return new JobBuilder("importAfOdsMongo", jobRepository)
       .start(downloadFileStep())
+      .next(step())
       .build();
   }
 
